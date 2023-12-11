@@ -1,8 +1,9 @@
-import Pagination from '@/app/ui/dashboard/pagination/pagination'
-import styles from '@/app/ui/dashboard/products/products.module.css'
-import Search from '@/app/ui/dashboard/search/search'
-import Image from 'next/image'
+
 import Link from 'next/link'
+import Pagination from '../../ui/dashboard/pagination/pagination'
+import Product from '../../ui/dashboard/products/product'
+import styles from '../../ui/dashboard/products/products.module.css'
+import Search from '../../ui/dashboard/search/search'
 const Products = () => {
   return (
   
@@ -13,87 +14,10 @@ const Products = () => {
           <button className={styles.addButton}>Add New</button>
         </Link>
       </div>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Price</td>
-            <td>Created At</td>
-            <td>Stock</td>
-            <td>Action</td>
-          </tr>
-        </thead>
-        <tbody>
-        
-            <tr >
-              <td>
-                <div className={styles.product}>
-                  <Image
-                    src="/noproduct.jpg"
-                    alt=""
-                    width={40}
-                    height={40}
-                    className={styles.productImage}
-                  />
-                  IPHONE
-                </div>
-              </td>
-              <td>orem Ipsum is simply dummy text of </td>
-              <td>£45678</td>
-              <td>12.8.2023</td>
-              <td>45</td>
-              <td>
-                <div className={styles.buttons}>
-                  <Link href={`/dashboard/products/test`}>
-                    <button className={`${styles.button} ${styles.view}`}>
-                      View
-                    </button>
-                  </Link>
-                 
-                    <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
-                    </button>
-                 
-                </div>
-              </td>
-            </tr>
-            <tr >
-              <td>
-                <div className={styles.product}>
-                  <Image
-                    src="/noproduct.jpg"
-                    alt=""
-                    width={40}
-                    height={40}
-                    className={styles.productImage}
-                  />
-                  IPHONE
-                </div>
-              </td>
-              <td>orem Ipsum  text of the  Lorem Ipsum has .</td>
-              <td>£45678</td>
-              <td>12.8.2023</td>
-              <td>45</td>
-              <td>
-                <div className={styles.buttons}>
-                  <Link href={`/dashboard/products/`}>
-                    <button className={`${styles.button} ${styles.view}`}>
-                      View
-                    </button>
-                  </Link>
-                 
-                    <input type="hidden" name="id" value='' />
-                    <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
-                    </button>
-                  
-                </div>
-              </td>
-            </tr>
-        </tbody>
-        </table>
-        <Pagination />
+      <div className={styles.properties}>
+        <Product/>
+      </div>
+        <Pagination/>
 
     </div>
   )

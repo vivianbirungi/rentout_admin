@@ -29,7 +29,7 @@ const menuItems = [
         },
         {
           title: "Products",
-          path: "/dashboard/products",
+          path: "/dashboard/property",
           icon: <MdShoppingBag />,
         },
         {
