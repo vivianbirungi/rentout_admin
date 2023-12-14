@@ -1,10 +1,10 @@
 import Image from 'next/image'
-import { MdDelete, MdEdit, MdEditCalendar } from 'react-icons/md'
+import { MdDelete, MdEdit } from 'react-icons/md'
 import styles from './products.module.css'
 const Property = () => {
   return (
     <div className={styles.propertyContainer}>
-        <Image className={styles.productImage} src='/noavatar.png' width={180} height={180} alt='productImage'/>
+        <Image className={styles.productImage} src='/noavatar.png' width={130} height={180} alt='productImage'/>
         <div className={styles.content}>
             <div className={styles.header}>
                 <h4 className={styles.header}>Product Name</h4>

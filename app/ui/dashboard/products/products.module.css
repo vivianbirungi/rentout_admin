@@ -69,7 +69,7 @@
    
   }
   .content{
-    flex:2;
+    flex:3;
     display: flex;
     flex-direction: column;
     height: 180px;
@@ -117,3 +117,21 @@
     font-size: 14px;
 
   }
+  .properties{
+      display: flex;
+      gap:20px;
+      flex-wrap: wrap; 
+  }
+  .properties .single{
+    width: 48%;
+  }
+  @media only screen and (max-width: 900px){
+    .properties{
+      
+      flex-direction: column; 
+  }
+    .properties .single{
+      width: 98%;
+    }
+  }
+  

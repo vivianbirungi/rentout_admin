@@ -5,6 +5,7 @@ import Product from '../../ui/dashboard/products/product'
 import styles from '../../ui/dashboard/products/products.module.css'
 import Search from '../../ui/dashboard/search/search'
 const Products = () => {
+  const properties = [{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7}]
   return (
   
       <div className={styles.container}>
@@ -15,7 +16,10 @@ const Products = () => {
         </Link>
       </div>
       <div className={styles.properties}>
-        <Product/>
+        {properties.map((property)=>(
+        <div className={styles.single}><Product/></div>
+        ))}
+       
       </div>
         <Pagination/>
 

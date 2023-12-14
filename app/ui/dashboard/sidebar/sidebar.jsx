@@ -28,13 +28,13 @@ const menuItems = [
           icon: <MdSupervisedUserCircle />,
         },
         {
-          title: "Products",
+          title: "Properties",
           path: "/dashboard/property",
           icon: <MdShoppingBag />,
         },
         {
-          title: "Transactions",
-          path: "/dashboard/transactions",
+          title: "Subscription",
+          path: "/dashboard/subscription",
           icon: <MdAttachMoney />,
         },
       ],
