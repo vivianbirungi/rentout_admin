@@ -17,7 +17,7 @@ const Products = () => {
       </div>
       <div className={styles.properties}>
         {properties.map((property)=>(
-        <div className={styles.single}><Product/></div>
+        <div className={styles.single}><Link href={`/dashboard/property/test`}><Product/></Link></div>
         ))}
        
       </div>

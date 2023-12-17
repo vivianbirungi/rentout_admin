@@ -1,14 +1,14 @@
-import axios from "axios";
-const base_url = "";
+import instance from '../../../config';
 
-export function login(user) {
-    return axios.post(
-      `${base_url}/userLogIn`,
+const login = async user => {
+  console.log(JSON.stringify(user));
+    const response = await instance.post(
+      'authenticationservice/mobileLogin',
       JSON.stringify(user),
-      {
-        headers: { "Content-Type": "application/json" },
-      }
     );
-  }
+    return response.data;
+  };
+
+export default {login};
 
 
