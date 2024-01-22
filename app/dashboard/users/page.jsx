@@ -1,30 +1,52 @@
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useHttpGet } from '../../hooks/useHttpGet';
 import Pagination from '../../ui/dashboard/pagination/pagination';
 import Search from '../../ui/dashboard/search/search';
+import SelectItem from '../../ui/dashboard/select/select';
 import styles from '../../ui/dashboard/users/users.module.css';
+import { MdDelete, MdOutlineRemoveRedEye, MdPageview } from 'react-icons/md';
+const UsersPage = ({searchParams}) => {
+  // const pages = searchParams[page]?? '1';
+  // const per_page = searchParams['per_page'] ?? '5';
+  const [type, setType]= useState('landlord');
+  const [currentPage, setCurrentPage] = useState(1);
+  const start = (Number(currentPage)-1) * 10;
+  const end = start + 10;
+  const users = useHttpGet(`get_Users/${type}`);
+  console.log(users);
+  const entries = Array.isArray(users.data) ? users.data.slice(start, end) : [];
 
-const UsersPage = () => {
+  useEffect(()=>{
+    users.getData();
+  },[type])
+  const handlePagination =(e) => {
+    setCurrentPage(e);
+    
+  }
   return (
     <div className={styles.container}>
     <div className={styles.top}>
-      <Search placeholder="Search for a user..." />
-      <Link href="/dashboard/users/add">
-        <button className={styles.addButton}>Add New</button>
-      </Link>
+    <SelectItem selectedValue={type} values={['landlord','tenant']} handleSelect={(e)=>{setType(e)}}/>
+    <Search placeholder="Search for a user..." />
+      
     </div>
+    
     <table className={styles.table}>
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Created At</td>
-          <td>Role</td>
-          <td>Status</td>
+          <td >Name</td>
+          <td className='hidden'>Email</td>
+          <td className='hidden'>Created At</td>
+          <td className='hidden'>Role</td>
+          <td className='hidden'>Status</td>
           <td>Action</td>
         </tr>
       </thead>
       <tbody>
+      {entries.map((user)=>(
       <tr>
               <td>
                 <div className={styles.user}>
@@ -35,65 +57,36 @@ const UsersPage = () => {
                     height={40}
                     className={styles.userImage}
                   />
-                  John Doe
+                  {user?.full_name}
                 </div>
               </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
-              <td>active</td>
+              <td className='hidden'>  {user?.email}</td>
+              <td className='hidden'>  {user?.created_at}</td>
+              <td className='hidden'>{user?.user_type}</td>
+              <td className='hidden'>{user?.isVerified == "Y"?"YES":"NO"}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/test`}>
+                  <Link href={`/dashboard/users/${user?.user_id}`}>
                     <button className={`${styles.button} ${styles.view}`}>
-                      View
+                      <MdOutlineRemoveRedEye />
                     </button>
                   </Link>
                   
                     <input type="hidden" name="id" value='' />
                     <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
+                      <MdDelete/>
                     </button>
                  
                 </div>
               </td>
-      </tr>
-      <tr>
-              <td>
-                <div className={styles.user}>
-                  <Image
-                    src="/noavatar.png"
-                    alt=""
-                    width={40}
-                    height={40}
-                    className={styles.userImage}
-                  />
-                  John Doe
-                </div>
-              </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
-              <td>active</td>
-              <td>
-                <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/`}>
-                    <button className={`${styles.button} ${styles.view}`}>
-                      View
-                    </button>
-                  </Link>
-                  
-                    <input type="hidden" name="id" value='' />
-                    <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
-                    </button>
-                 
-                </div>
-              </td>
-      </tr>
+      </tr>))}
+      
         </tbody>
       </table>
-      <Pagination />
+      <Pagination arrayLength={users.data?.length}
+          currentPage={currentPage}
+          handleClick={handlePagination}
+          perpage={10} />
     </div>
   )
 }

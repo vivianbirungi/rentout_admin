@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Pagination from '../../ui/dashboard/pagination/pagination';
 import Search from '../../ui/dashboard/search/search';
 import styles from '../../ui/dashboard/users/users.module.css';
+import { MdDelete, MdRemoveRedEye } from 'react-icons/md';
 
 const SubscriptionPage = () => {
   return (
@@ -16,12 +17,12 @@ const SubscriptionPage = () => {
     <table className={styles.table}>
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Created At</td>
-          <td>Role</td>
-          <td>Status</td>
-          <td>Action</td>
+          <td >Name</td>
+          <td className='hidden'>Email</td>
+          <td className='hidden'>Created At</td>
+          <td className='hidden'>Role</td>
+          <td className='hidden'>Status</td>
+          <td >Action</td>
         </tr>
       </thead>
       <tbody>
@@ -38,21 +39,21 @@ const SubscriptionPage = () => {
                   John Doe
                 </div>
               </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
-              <td>active</td>
+              <td className='hidden'>viviangal@email.com</td>
+              <td className='hidden'>12.02.2023</td>
+              <td className='hidden'>Admin</td>
+              <td className='hidden'>active</td>
               <td>
-                <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/test`}>
+              <div className={styles.buttons}>
+                  <Link href={`/dashboard/users/`}>
                     <button className={`${styles.button} ${styles.view}`}>
-                      View
+                     <MdRemoveRedEye/>
                     </button>
                   </Link>
                   
                     <input type="hidden" name="id" value='' />
                     <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
+                      <MdDelete/>
                     </button>
                  
                 </div>
@@ -71,21 +72,21 @@ const SubscriptionPage = () => {
                   John Doe
                 </div>
               </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
-              <td>active</td>
+              <td className='hidden'>viviangal@email.com</td>
+              <td className='hidden'>12.02.2023</td>
+              <td className='hidden'>Admin</td>
+              <td className='hidden'>active</td>
               <td>
                 <div className={styles.buttons}>
                   <Link href={`/dashboard/users/`}>
                     <button className={`${styles.button} ${styles.view}`}>
-                      View
+                     <MdRemoveRedEye/>
                     </button>
                   </Link>
                   
                     <input type="hidden" name="id" value='' />
                     <button className={`${styles.button} ${styles.delete}`}>
-                      Delete
+                      <MdDelete/>
                     </button>
                  
                 </div>

@@ -37,9 +37,6 @@ const SingleUserPage = async ({ params }) => {
       <thead>
         <tr>
           <td>Name</td>
-          <td>Email</td>
-          <td>Created At</td>
-          <td>Role</td>
           <td>Status</td>
           <td>Action</td>
         </tr>
@@ -58,9 +55,6 @@ const SingleUserPage = async ({ params }) => {
                   John Doe
                 </div>
               </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
               <td>active</td>
               <td>
                 <div className={styles.buttons}>
@@ -91,9 +85,6 @@ const SingleUserPage = async ({ params }) => {
                   John Doe
                 </div>
               </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
               <td>active</td>
               <td>
                 <div className={styles.buttons}>
@@ -120,9 +111,6 @@ const SingleUserPage = async ({ params }) => {
       <thead>
         <tr>
           <td>Name</td>
-          <td>Email</td>
-          <td>Created At</td>
-          <td>Role</td>
           <td>Status</td>
           <td>Action</td>
         </tr>
@@ -141,9 +129,6 @@ const SingleUserPage = async ({ params }) => {
                   John Doe
                 </div>
               </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
               <td>active</td>
               <td>
                 <div className={styles.buttons}>
@@ -174,9 +159,6 @@ const SingleUserPage = async ({ params }) => {
                   John Doe
                 </div>
               </td>
-              <td>viviangal@email.com</td>
-              <td>12.02.2023</td>
-              <td>Admin</td>
               <td>active</td>
               <td>
                 <div className={styles.buttons}>

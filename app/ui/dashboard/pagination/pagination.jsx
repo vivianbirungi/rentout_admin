@@ -1,21 +1,34 @@
 "use client";
 
+import { MdOutlineSkipNext, MdOutlineSkipPrevious } from "react-icons/md";
 import styles from "./pagination.module.css";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const Pagination = ({ count }) => {
- 
+const Pagination = ({ 
+  arrayLength,
+  currentPage,
+  handleClick,
+  perpage }) => {
+  
+   const lastPage = Math.ceil(arrayLength / perpage);
+
 
   return (
     <div className={styles.container}>
-      <button
-        className={styles.button}>
-        Previous
-      </button>
-      <button
-        className={styles.button}>
-        Next
-      </button>
+     {currentPage > 1 && (
+          <button onClick={()=>handleClick(currentPage-1)}
+            className={styles.Pagination__buttons}
+            
+          >
+          <MdOutlineSkipPrevious/> Previous
+          </button>
+        )}
+        {lastPage}
+        {currentPage < lastPage && (
+                   <button onClick={()=>handleClick(currentPage + 1)}
+                    className={styles.Pagination__buttons}>
+            Next <MdOutlineSkipNext/>
+          </button>
+        )}
     </div>
   );
 };

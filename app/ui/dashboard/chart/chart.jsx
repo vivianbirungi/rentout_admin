@@ -42,7 +42,7 @@ const Chart = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Weekly Report</h2>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="90%" height="100%">
         <LineChart
           width={500}
           height={300}

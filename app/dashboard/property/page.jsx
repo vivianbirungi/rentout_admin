@@ -1,11 +1,12 @@
-
+'use client'
 import Link from 'next/link'
+import useHttpGet from '../../hooks/useHttpGet'
 import Pagination from '../../ui/dashboard/pagination/pagination'
 import Product from '../../ui/dashboard/products/product'
 import styles from '../../ui/dashboard/products/products.module.css'
 import Search from '../../ui/dashboard/search/search'
 const Products = () => {
-  const properties = [{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7}]
+  const properties = useHttpGet('get_Properties');
   return (
   
       <div className={styles.container}>
@@ -16,7 +17,7 @@ const Products = () => {
         </Link>
       </div>
       <div className={styles.properties}>
-        {properties.map((property)=>(
+        {properties.data?.map((property)=>(
         <div className={styles.single}><Link href={`/dashboard/property/test`}><Product/></Link></div>
         ))}
        
