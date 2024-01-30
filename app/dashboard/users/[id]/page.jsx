@@ -4,24 +4,9 @@ import Link from "next/link";
 import styles from "../../../ui/dashboard/users/singleUser/singleUser.module.css";
 // /dashboard/users/[id].js
 
-export async function getStaticPaths() {
-  // Your existing code for generating static paths
-}
 
-export async function generateStaticParams({ params }) {
-  // Your logic for generating static params
-  return {
-    // ...
-  };
-}
 
-export async function getStaticProps({ params }) {
-  // Your existing code for fetching static props
-}
-
-// Rest of your page component code
-
-const SingleUserPage = async ({params}) => {
+const SingleUserPage = async () => {
   
   
 
