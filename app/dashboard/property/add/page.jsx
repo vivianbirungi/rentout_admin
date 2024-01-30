@@ -1,6 +1,6 @@
 // import { addProduct } from "@/app/lib/actions";
-import styles from "@/app/ui/dashboard/products/addProduct/addProduct.module.css";
 
+import styles from "../../../ui/dashboard/products//products.module.css";
 const AddProductPage = () => {
   return (
     <div className={styles.container}>
