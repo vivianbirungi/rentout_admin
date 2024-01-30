@@ -1,9 +1,9 @@
 
 import Image from "next/image";
-import styles from "../../../ui/dashboard/users/singleUser/singleUser.module.css";
 import Link from "next/link";
+import styles from "../../../ui/dashboard/users/singleUser/singleUser.module.css";
 
-const SingleUserPage = async ({ params }) => {
+const SingleUserPage = async () => {
   
   
 
