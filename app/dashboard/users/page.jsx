@@ -2,12 +2,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { MdDelete, MdOutlineRemoveRedEye } from 'react-icons/md';
 import { useHttpGet } from '../../hooks/useHttpGet';
 import Pagination from '../../ui/dashboard/pagination/pagination';
 import Search from '../../ui/dashboard/search/search';
 import SelectItem from '../../ui/dashboard/select/select';
 import styles from '../../ui/dashboard/users/users.module.css';
-import { MdDelete, MdOutlineRemoveRedEye, MdPageview } from 'react-icons/md';
 const UsersPage = () => {
   // const pages = searchParams[page]?? '1';
   // const per_page = searchParams['per_page'] ?? '5';
@@ -66,7 +66,7 @@ const UsersPage = () => {
               <td className='hidden'>{user?.isVerified == "Y"?"YES":"NO"}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/${user?.user_id}`}>
+                  <Link href={`/dashboard/users/user`}>
                     <button className={`${styles.button} ${styles.view}`}>
                       <MdOutlineRemoveRedEye />
                     </button>

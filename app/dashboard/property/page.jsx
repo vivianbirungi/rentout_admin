@@ -1,11 +1,11 @@
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useHttpGet } from '../../hooks/useHttpGet'
 import Pagination from '../../ui/dashboard/pagination/pagination'
 import Product from '../../ui/dashboard/products/product'
 import styles from '../../ui/dashboard/products/products.module.css'
 import Search from '../../ui/dashboard/search/search'
-import { useState } from 'react'
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const start = (Number(currentPage)-1) * 100;
@@ -31,7 +31,7 @@ const Products = () => {
       <div className={styles.properties}>
         {entries.map((property)=>(
         <div className={styles.single}>
-          <Link href={`/dashboard/property/test`}>
+          <Link href={`/dashboard/property/property`}>
             <Product productData={property}/></Link></div>
         ))}
        
