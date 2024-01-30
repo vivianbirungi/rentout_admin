@@ -7,9 +7,9 @@ const Transaction = () => {
         <table className={styles.table}>
             <thead>
                 <tr>
-                <td>Name</td>
-                <td>Status</td>
-                <td>Date</td>
+                <td >Name</td>
+                <td className='hidden'>Status</td>
+                <td className='hidden'>Date</td>
                 <td>Amount</td>
                 </tr>
             </thead>
@@ -21,8 +21,8 @@ const Transaction = () => {
                         John Doe
                         </div>
                     </td>
-                    <td><span className={`${styles.pending} ${styles.status}`}>Pending</span></td>
-                    <td>14.02.2023</td>
+                    <td className='hidden'><span className={`${styles.pending} ${styles.status}`}>Pending</span></td>
+                    <td className='hidden'>14.02.2023</td>
                     <td>$3200</td>
                     
                 </tr>
@@ -33,8 +33,8 @@ const Transaction = () => {
                         Little Mary
                         </div>
                     </td>
-                    <td><span className={`${styles.done} ${styles.status}`}>Cancelled</span></td>
-                    <td>14.02.2023</td>
+                    <td className='hidden'><span className={`${styles.done} ${styles.status}`}>Cancelled</span></td>
+                    <td className='hidden'>14.02.2023</td>
                     <td>$6200</td>
                     
                 </tr>
@@ -45,8 +45,8 @@ const Transaction = () => {
                         TrueCell
                         </div>
                     </td>
-                    <td><span className={`${styles.cancelled} ${styles.status}`}>Pending</span></td>
-                    <td>14.02.2023</td>
+                    <td className='hidden'><span className={`${styles.cancelled} ${styles.status}`}>Pending</span></td>
+                    <td className='hidden'>14.02.2023</td>
                     <td>$1200</td>
                     
                 </tr>

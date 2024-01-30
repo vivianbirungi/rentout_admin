@@ -1,6 +1,7 @@
 
 import Image from "next/image";
 import styles from "../../../ui/dashboard/users/singleUser/singleUser.module.css";
+import Link from "next/link";
 
 const SingleUserPage = async ({ params }) => {
   
@@ -10,35 +11,174 @@ const SingleUserPage = async ({ params }) => {
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
-          <Image src= "/noavatar.png" alt="" fill />
+          <Image src= "/noavatar.png" alt="" width={200} height= {200}/>
         </div>
-        john doe
+        <div className={styles.userDetail}>
+          <div className={styles.header}>
+             <span>john doe</span>
+             <span>Active</span>
+          </div>
+          <div className={styles.userInfo}>
+            <div><span>Role: </span> <span>LandLord</span></div>
+            <div><span>Email:</span> <span> vivi@gmail.com</span></div>
+            <div><span>phone: </span> <span>256779385247</span></div>
+            <div><span>Company:</span> <span> OUR TOURS BEIGE </span></div>
+        
+
+          </div>
+        </div>
       </div>
       <div className={styles.formContainer}>
-        <form  className={styles.form}>
-          <input type="hidden" name="id" value=''/>
-          <label>Username</label>
-          <input type="text" name="username" placeholder='' />
-          <label>Email</label>
-          <input type="email" name="email" placeholder=''/>
-          <label>Password</label>
-          <input type="password" name="password" />
-          <label>Phone</label>
-          <input type="text" name="phone" placeholder='' />
-          <label>Address</label>
-          <textarea type="text" name="address" placeholder='' />
-          <label>Is Admin?</label>
-          <select name="isAdmin" id="isAdmin">
-            <option value={true} >Yes</option>
-            <option value={false} >No</option>
-          </select>
-          <label>Is Active?</label>
-          <select name="isActive" id="isActive">
-            <option value={true} >Yes</option>
-            <option value={false} >No</option>
-          </select>
-          <button>Update</button>
-        </form>
+        
+      
+      <div className={styles.propertyContainer}>
+        <h4>Properties</h4>
+        <table className={styles.table}>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Status</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+              <td>
+                <div className={styles.user}>
+                  <Image
+                    src="/noavatar.png"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className={styles.userImage}
+                  />
+                  John Doe
+                </div>
+              </td>
+              <td>active</td>
+              <td>
+                <div className={styles.buttons}>
+                  <Link href={`/dashboard/users/test`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      View
+                    </button>
+                  </Link>
+                  
+                    <input type="hidden" name="id" value='' />
+                    <button className={`${styles.button} ${styles.delete}`}>
+                      Delete
+                    </button>
+                 
+                </div>
+              </td>
+      </tr>
+      <tr>
+              <td>
+                <div className={styles.user}>
+                  <Image
+                    src="/noavatar.png"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className={styles.userImage}
+                  />
+                  John Doe
+                </div>
+              </td>
+              <td>active</td>
+              <td>
+                <div className={styles.buttons}>
+                  <Link href={`/dashboard/users/`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      View
+                    </button>
+                  </Link>
+                  
+                    <input type="hidden" name="id" value='' />
+                    <button className={`${styles.button} ${styles.delete}`}>
+                      Delete
+                    </button>
+                 
+                </div>
+              </td>
+      </tr>
+        </tbody>
+      </table>
+      </div>
+      <div className={styles.tendanciesContainer}>
+      <h4>Users</h4>
+      <table className={styles.table}>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Status</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+              <td>
+                <div className={styles.user}>
+                  <Image
+                    src="/noavatar.png"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className={styles.userImage}
+                  />
+                  John Doe
+                </div>
+              </td>
+              <td>active</td>
+              <td>
+                <div className={styles.buttons}>
+                  <Link href={`/dashboard/users/test`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      View
+                    </button>
+                  </Link>
+                  
+                    <input type="hidden" name="id" value='' />
+                    <button className={`${styles.button} ${styles.delete}`}>
+                      Delete
+                    </button>
+                 
+                </div>
+              </td>
+      </tr>
+      <tr>
+              <td>
+                <div className={styles.user}>
+                  <Image
+                    src="/noavatar.png"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className={styles.userImage}
+                  />
+                  John Doe
+                </div>
+              </td>
+              <td>active</td>
+              <td>
+                <div className={styles.buttons}>
+                  <Link href={`/dashboard/users/`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      View
+                    </button>
+                  </Link>
+                  
+                    <input type="hidden" name="id" value='' />
+                    <button className={`${styles.button} ${styles.delete}`}>
+                      Delete
+                    </button>
+                 
+                </div>
+              </td>
+      </tr>
+        </tbody>
+      </table>
+      </div>
       </div>
     </div>
   );

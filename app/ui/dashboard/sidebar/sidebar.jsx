@@ -1,4 +1,6 @@
+'use client'
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   MdAnalytics,
   MdAttachMoney,
@@ -11,6 +13,7 @@ import {
   MdSupervisedUserCircle,
   MdWork
 } from "react-icons/md";
+import secureLocalStorage from 'react-secure-storage';
 import MenuLink from './menuLink/menuLink';
 import styles from './sidebar.module.css';
 const menuItems = [
@@ -76,8 +79,9 @@ const menuItems = [
     },
   ];
 const Sidebar = () => {
+  const router = useRouter();
   return (
-    <div className='container'>
+    <div className={styles.container}>
         <div className={styles.user}>
             <Image className={styles.userImage} src="/noavatar.png" alt="" width="50" height="50" />
             <div className={styles.userDetail}>
@@ -93,7 +97,7 @@ const Sidebar = () => {
         </li>
      )))}
      </ul>
-     <button className={styles.logout}><MdSearch/>Logout</button>
+     <button className={styles.logout} onClick={()=>{secureLocalStorage.clear(); router.push('/login')}}><MdSearch/>Logout</button>
     </div>
   )
 }
