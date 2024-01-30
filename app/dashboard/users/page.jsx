@@ -8,7 +8,7 @@ import Search from '../../ui/dashboard/search/search';
 import SelectItem from '../../ui/dashboard/select/select';
 import styles from '../../ui/dashboard/users/users.module.css';
 import { MdDelete, MdOutlineRemoveRedEye, MdPageview } from 'react-icons/md';
-const UsersPage = ({searchParams}) => {
+const UsersPage = () => {
   // const pages = searchParams[page]?? '1';
   // const per_page = searchParams['per_page'] ?? '5';
   const [type, setType]= useState('landlord');

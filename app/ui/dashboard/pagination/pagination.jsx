@@ -22,7 +22,7 @@ const Pagination = ({
           <MdOutlineSkipPrevious/> Previous
           </button>
         )}
-        {lastPage}
+        
         {currentPage < lastPage && (
                    <button onClick={()=>handleClick(currentPage + 1)}
                     className={styles.Pagination__buttons}>

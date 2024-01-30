@@ -1,32 +1,30 @@
 import Image from 'next/image'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import styles from './products.module.css'
-const Property = () => {
+const Property = ({productData}) => {
+    const images = productData.images.split(',');
+    console.log(productData)
   return (
+    // src={BASEURL.Base_URL+images[0]}
     <div className={styles.propertyContainer}>
-        <Image className={styles.productImage} src='/noavatar.png' width={130} height={180} alt='productImage'/>
+        <Image className={styles.productImage} src='/house.png' width={180} height={200} alt='productImage'/>
         <div className={styles.content}>
-            <div className={styles.header}>
-                <h4 className={styles.header}>Product Name</h4>
-                <span className={styles.status}>Verified</span>
-            </div>
             <div className={styles.productDetail}>
-                <span className={styles.type}>Apartment</span>
-                <span className={styles.owner}>Hosted by John Doe</span>
+            <span className={styles.header}>{productData?.pro_titile}</span>
+                <span className={styles.type}>{productData?.pro_type}</span>
+                <span className={styles.owner}>Owner: {productData?.full_name}</span>
+                {/* <span className={styles.owner}>Listed For: {productData?.pro_for}</span> */}
+                <span className={styles.price}> Units: {productData?.total_units}</span>
+            
             </div>
-            <ul className={styles.list}>
-                <li>2bedroom</li>
-                <li>2bath</li>
-                <li>balcony</li>
-            </ul>
-            <div className={styles.price}> Price $300000</div>
-
-
-        </div>
-        <div className={styles.action}>
+            
+            {/* <div className={`${styles.action} hidden`}>
             <MdEdit/>
             <MdDelete/>
+        </div> */}
+
         </div>
+        
 
       
     </div>
