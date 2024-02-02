@@ -2,12 +2,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { MdDelete, MdOutlineRemoveRedEye } from 'react-icons/md';
 import { useHttpGet } from '../../hooks/useHttpGet';
 import Pagination from '../../ui/dashboard/pagination/pagination';
 import Search from '../../ui/dashboard/search/search';
 import SelectItem from '../../ui/dashboard/select/select';
 import styles from '../../ui/dashboard/users/users.module.css';
-import { MdDelete, MdOutlineRemoveRedEye, MdPageview } from 'react-icons/md';
 const UsersPage = () => {
   // const pages = searchParams[page]?? '1';
   // const per_page = searchParams['per_page'] ?? '5';
@@ -18,6 +18,14 @@ const UsersPage = () => {
   const users = useHttpGet(`get_Users/${type}`);
   console.log(users);
   const entries = Array.isArray(users.data) ? users.data.slice(start, end) : [];
+  const [filteredData, setFilteredData] = useState(Array.isArray(users.data) ? users.data.slice(start, end) : []);
+
+  const handleSearch = (searchTerm) => {
+    const filtered = entries.filter((item) =>
+      Object.values(item).some((value) => value.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+    setFilteredData(filtered);
+  };
 
   useEffect(()=>{
     users.getData();
@@ -30,7 +38,7 @@ const UsersPage = () => {
     <div className={styles.container}>
     <div className={styles.top}>
     <SelectItem selectedValue={type} values={['landlord','tenant']} handleSelect={(e)=>{setType(e)}}/>
-    <Search placeholder="Search for a user..." />
+    <Search placeholder="Search for a user..." onSearch={handleSearch}/>
       
     </div>
     
@@ -46,7 +54,7 @@ const UsersPage = () => {
         </tr>
       </thead>
       <tbody>
-      {entries.map((user)=>(
+      {filteredData.map((user)=>(
       <tr>
               <td>
                 <div className={styles.user}>

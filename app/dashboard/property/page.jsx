@@ -1,23 +1,28 @@
 'use client'
 import Link from 'next/link'
-import { useHttpGet } from '../../hooks/useHttpGet'
+import { useEffect, useState } from 'react'
+import useRLStore from '../../lib/store'
 import Pagination from '../../ui/dashboard/pagination/pagination'
 import Product from '../../ui/dashboard/products/product'
 import styles from '../../ui/dashboard/products/products.module.css'
 import Search from '../../ui/dashboard/search/search'
-import { useState } from 'react'
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const start = (Number(currentPage)-1) * 100;
   const end = start + 100;
-  const properties = useHttpGet('get_Properties');
-  const entries = Array.isArray(properties.data) ? properties.data.slice(start, end) : [];
+  // const properties = useHttpGet('get_Properties');
+  const {properties, getProperties, setActiveProperty} = useRLStore(state => state);
+  console.log({properties});
+  const entries = Array.isArray(properties) ? properties.slice(start, end) : [];
   
 
   const handlePagination =(e) => {
     setCurrentPage(e);
     
   }
+  useEffect(() => {
+    getProperties()
+  },[])
   return (
   
       <div className={styles.container}>
