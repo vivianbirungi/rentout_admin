@@ -20,29 +20,31 @@ const useRLStore = create(
 
       getTenants: async () => {
         const results = await instance.get(`get_Users/tenant`);
-        set((state) => ({ ...state, tenants: results }));
+        
+        set((state) => ({ ...state, tenants: results.data }));
       },
 
       getLandlords: async () => {
         const results = await instance.get(`get_Users/landlord`);
-        set((state) => ({ ...state, landLords: results }));
+       
+
+        set((state) => ({ ...state, landLords: results.data }));
       },
 
       getSubscriptions: async () => {
         const results = await instance.get('get_subscriptions');
-        console.log(results);
+       
         set((state) => ({ ...state, subscriptions: results.data.results }));
       },
-
+     
       setActiveUser: (userId, userType) => {
         let user = null;
-
         if (userType === 'tenant') {
-          user = get().tenants.find((tenant) => tenant.userId === userId);
+          user = get().tenants.results.find((tenant) => tenant.user_d === userId);
         } else {
-          user = get().landLords.find((landLord) => landLord.userId === userId);
+          user = get().landLords.results.find((landLord) => landLord.user_id === userId);
         }
-
+        
         set((state) => ({ ...state, activeUser: user }));
       },
 
