@@ -1,10 +1,11 @@
 "use client"
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdDelete, MdOutlineRemoveRedEye } from 'react-icons/md';
-import { useHttpGet } from '../../hooks/useHttpGet';
+import UserAvatar from 'react-user-avatar';
+import useRLStore from '../../lib/store';
 import Pagination from '../../ui/dashboard/pagination/pagination';
+
+import { useRouter } from 'next/navigation';
 import Search from '../../ui/dashboard/search/search';
 import SelectItem from '../../ui/dashboard/select/select';
 import styles from '../../ui/dashboard/users/users.module.css';
@@ -15,24 +16,43 @@ const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const start = (Number(currentPage)-1) * 10;
   const end = start + 10;
-  const users = useHttpGet(`get_Users/${type}`);
-  console.log(users);
-  const entries = Array.isArray(users.data) ? users.data.slice(start, end) : [];
-  const [filteredData, setFilteredData] = useState(Array.isArray(users.data) ? users.data.slice(start, end) : []);
-
+  const router = useRouter();
+  // const users = useHttpGet(`get_Users/${type}`);
+  const {tenants, landLords, getLandlords, getTenants, setActiveUser} = useRLStore(state => state);
+  Array.isArray(landLords.results) ? landLords.results.slice(start, end) : []
+  const entries = type === 'landlord' ? landLords?.results.slice(start, end):tenants?.results.slice(start, end)
+  const [filteredData, setFilteredData] = useState(type === 'landlord' ? landLords.results.slice(start, end):tenants.results.slice(start, end));
+  
   const handleSearch = (searchTerm) => {
     const filtered = entries.filter((item) =>
       Object.values(item).some((value) => value.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     setFilteredData(filtered);
   };
-
-  useEffect(()=>{
-    users.getData();
-  },[type])
-  const handlePagination =(e) => {
-    setCurrentPage(e);
+  console.log({landLords});
+  console.log({tenants});
+  console.log({type})
+  console.log({entries})
+  console.log(filteredData)
+  const getUsers = ()=>{
+    if(type === 'landlord'){ getLandlords();
     
+    }
+    else {getTenants();}
+  }
+  useEffect(()=>{
+    // users.getData();
+    
+      getUsers();
+      setFilteredData(entries)
+    },[type])
+ 
+  const handlePagination =(e) => {
+    setCurrentPage(e); 
+  }
+  const handleViewUser =(id, type) => {
+      setActiveUser(id, type);
+      router.push('/dashboard/users/user')
   }
   return (
     <div className={styles.container}>
@@ -54,17 +74,11 @@ const UsersPage = () => {
         </tr>
       </thead>
       <tbody>
-      {filteredData.map((user)=>(
-      <tr>
+      {entries.map((user)=>(
+      <tr key={user.user_id}>
               <td>
                 <div className={styles.user}>
-                  <Image
-                    src="/noavatar.png"
-                    alt=""
-                    width={40}
-                    height={40}
-                    className={styles.userImage}
-                  />
+                <UserAvatar size="48" name={user?.full_name} />
                   {user?.full_name}
                 </div>
               </td>
@@ -74,11 +88,11 @@ const UsersPage = () => {
               <td className='hidden'>{user?.isVerified == "Y"?"YES":"NO"}</td>
               <td>
                 <div className={styles.buttons}>
-                  <Link href={`/dashboard/users/${user?.user_id}`}>
-                    <button className={`${styles.button} ${styles.view}`}>
+                 
+                    <button className={`${styles.button} ${styles.view}`} onClick={()=>handleViewUser(user.user_id, user.user_type)}>
                       <MdOutlineRemoveRedEye />
                     </button>
-                  </Link>
+                
                   
                     <input type="hidden" name="id" value='' />
                     <button className={`${styles.button} ${styles.delete}`}>
@@ -91,7 +105,7 @@ const UsersPage = () => {
       
         </tbody>
       </table>
-      <Pagination arrayLength={users.data?.length}
+      <Pagination arrayLength={type=='landlord'?landLords.results.length: tenants.results.length}
           currentPage={currentPage}
           handleClick={handlePagination}
           perpage={10} />

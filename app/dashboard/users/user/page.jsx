@@ -1,12 +1,15 @@
-
+"use client"
 import Image from "next/image";
 import Link from "next/link";
+import useRLStore from '../../../lib/store';
 import styles from "../../../ui/dashboard/users/singleUser/singleUser.module.css";
 
-const SingleUserPage = async () => {
-  
-  
+const SingleUserPage =  () => {
+const {activeUser, properties} =useRLStore(state => state);
+// useEffect(()=>{getActiveUser})
+const myProperties = properties.filter(property => property.landlord_id === activeUser.user_id);
 
+console.log({myProperties});
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -15,14 +18,14 @@ const SingleUserPage = async () => {
         </div>
         <div className={styles.userDetail}>
           <div className={styles.header}>
-             <span>john doe</span>
-             <span>Active</span>
+             <span>{activeUser?.full_name}</span>
+             <span>{activeUser?.isverified}</span>
           </div>
           <div className={styles.userInfo}>
-            <div><span>Role: </span> <span>LandLord</span></div>
-            <div><span>Email:</span> <span> vivi@gmail.com</span></div>
-            <div><span>phone: </span> <span>256779385247</span></div>
-            <div><span>Company:</span> <span> OUR TOURS BEIGE </span></div>
+            <div><span>Role: </span> <span>{activeUser?.user_type}</span></div>
+            <div><span>Email:</span> <span> {activeUser?.email}</span></div>
+            <div><span>phone: </span> <span>{activeUser?.phone}</span></div>
+            <div><span>Country:</span> <span>{activeUser?.country} </span></div>
         
 
           </div>
