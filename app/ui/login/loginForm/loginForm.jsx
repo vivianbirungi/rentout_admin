@@ -17,8 +17,6 @@ const LoginForm = () => {
 
     // Convert the user object to a JSON string
     const userJSON = JSON.stringify(user);
-
-    // Save the JSON string to localStorage under a key, e.g., 'user'
     secureLocalStorage.setItem('user', userJSON);
     router.push('/dashboard');
   }
