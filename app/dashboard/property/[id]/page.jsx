@@ -1,35 +1,139 @@
-
+"use client";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Accordion from '../../../ui/dashboard/accordion/accordion';
 import styles from "../../../ui/dashboard/products/singleProduct/singleProduct.module.css";
-const SingleProductPage = async ({ params }) => {
-  
+import useRLStore from "../../../lib/store";
+import { getImages } from "../../../lib/utilties";
+import api from "../../../lib/properties";
+import { AiFillCloseCircle, AiFillCheckCircle } from "react-icons/ai";
+
+const SingleProductPage = () => {
+  const router = useRouter();
+
+  const activeProperty = useRLStore((state) => state.activeProperty);
+  const images = getImages(activeProperty?.images, activeProperty?.property_id);
+
+  const deleteProperty = async () => {
+    try {
+      const results = await api.deletePropertyApi(activeProperty?.property_id);
+      router.push("/dashboard/property");
+      alert("Property has been deleted");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.infoContainer} ${styles.snapsinline}`}>
-       {/* gallery */}
-       <div className={styles.mediaElement}><Image src='/out.jpg'  height={250} width={450}/></div>
-       <div className={styles.mediaElement}><Image  src='/inside.jpg'  height={250} width={450}/></div>
-       <div className={styles.mediaElement}><Image  src='/inside.jpg'  height={250} width={450}/></div>
+      <div>
+        {images.map((image) => (
+          <div className={styles.mediaElement}>
+            {image ? (
+              <Image
+                src={image}
+                height={250}
+                width={250}
+                style={{ marginRight: 10, aspectRatio: 1 }}
+              />
+            ) : (
+              <Image
+                src={
+                  "https://www.rentalynk.com/assets/images/rentalynk_tenants.jpg"
+                }
+                height={150}
+                width={150}
+              />
+            )}
+          </div>
+        ))}
       </div>
-      <div className={styles.detailContainer}>
-       <div className={styles.headerInfo}>
-        <span className={styles.propertyName}>Property Name</span><br/>
-        <span>Location</span>
+      <br />
 
-       </div> 
-        <hr/>
-        <div className={styles.description}>
-          <h6>Description</h6>
-          <p > که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-          </p>
+      <div className="section prodDetails">
+        <div>
+          <h2>{activeProperty.pro_title}</h2>
+          <p>{`${activeProperty.pro_type} in ${activeProperty.location_name}` }</p>
         </div>
-        <div className={styles.units}>
-          <h6>Available Units</h6>
-        <Accordion title='Single' items={[1,2,3]}/>
-        <Accordion title='Double' items={[1,2,3]}/>
-        <Accordion title='Tripple' items={[1,2,3]}/>
+
+        <div>
+          <button className="btnDelete" onClick={deleteProperty}>
+            Delete
+          </button>
+        </div>
+      </div>
+      <br />
+
+      <div className="section section_row stats">
+        <div>
+          {activeProperty.subscription_active ? (
+            <AiFillCheckCircle color="lime" />
+          ) : (
+            <AiFillCloseCircle color="red" size={30} />
+          )}
+          <small>Subscription Active</small>
+        </div>
+
+        <div>
+          {activeProperty.multiple_units ? (
+            <AiFillCheckCircle color="lime" />
+          ) : (
+            <AiFillCloseCircle color="red" />
+          )}
+          <small>Has Multiple Units</small>
+        </div>
+
+        <div>
+          {activeProperty.isRentedOut ? (
+            <AiFillCheckCircle color="lime" />
+          ) : (
+            <AiFillCloseCircle color="red" />
+          )}
+          <small>Property Rented Out</small>
+        </div>
+
+        <div>
+          {activeProperty.deleted ? (
+            <AiFillCheckCircle color="red" />
+          ) : (
+            <AiFillCloseCircle color="lime" />
+          )}
+          <small>Property Unlisted</small>
+        </div>
+      </div>
+
+      <div className="section">
+        <h3>Landlord Details</h3>
+        <p>{activeProperty.full_name}</p>
+        <br />
+        <small>
+          {`${activeProperty.country_code}${activeProperty.phone}`} |{" "}
+          {activeProperty.email}
+        </small>
+      </div>
+
+      <div className="section">
+        <h3>Description</h3>
+        <p>{activeProperty.description}</p>
+      </div>
+
+      <div className="section">
+        <h3>Amenties</h3>
+        <div className="section_row">
+          {activeProperty.amenities.split(",").map((amenity) => (
+            <span>{amenity}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <h3>Prices and Units</h3>
+        <div>
+          {activeProperty.units.map((unit) => (
+            <div className="unit_price">
+              <h3>{unit.unit_name}</h3>
+              <p>{`${unit.rent_fees} ${unit.currency}`}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

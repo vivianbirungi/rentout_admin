@@ -11,6 +11,7 @@ const useRLStore = create(
       subscriptions: [],
       activeUser: null,
       activeProperty: null,
+      fetchingProfile: false,
 
       getProperties: async () => {
         const response = await instance.get('get_Properties');
@@ -29,7 +30,7 @@ const useRLStore = create(
 
       getSubscriptions: async () => {
         const results = await instance.get('get_subscriptions');
-        console.log(results)
+        console.log(results);
         set((state) => ({ ...state, subscriptions: results.data.results }));
       },
 
@@ -45,11 +46,22 @@ const useRLStore = create(
         set((state) => ({ ...state, activeUser: user }));
       },
 
-      setActiveProperty: (propertyId) => {
+      setActiveProperty: async (propertyId) => {
+        set((state) => ({ ...state, fetchingProfile: true }));
+
         let property = get().properties.find(
-          (property) => property.prop_id === propertyId
+          (property) => property.property_id === propertyId
         );
-        set((state) => ({ ...state, activeProperty: property }));
+
+        const response = await instance.get(
+          `get_property_profile/${propertyId}`
+        );
+
+        set((state) => ({
+          ...state,
+          activeProperty: { ...property, units: response.data.units },
+          fetchingProfile: false,
+        }));
       },
     }),
     {
