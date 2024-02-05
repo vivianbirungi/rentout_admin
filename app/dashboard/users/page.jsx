@@ -82,8 +82,8 @@ const UsersPage = () => {
                   {user?.full_name}
                 </div>
               </td>
-              <td className='hidden'>  {user?.email}</td>
-              <td className='hidden'>  {user?.created_at}</td>
+              <td className='hidden'> {user?.email}</td>
+              <td className='hidden'> {user?.created_at}</td>
               <td className='hidden'>{user?.user_type}</td>
               <td className='hidden'>{user?.isVerified == "Y"?"YES":"NO"}</td>
               <td>
