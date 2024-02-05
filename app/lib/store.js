@@ -39,7 +39,7 @@ const useRLStore = create(
       setActiveUser: (userId, userType) => {
         let user = null;
         if (userType === 'tenant') {
-          user = get().tenants.results.find((tenant) => tenant.user_d === userId);
+          user = get().tenants.results.find((tenant) => tenant.user_id === userId);
         } else {
           user = get().landLords.results.find((landLord) => landLord.user_id === userId);
         }
