@@ -57,7 +57,7 @@ console.log({myProperties});
           </div>
         </div>
       </div>
-      {activeUser.user_type =='landlord'?(<div className={styles.formContainer}>
+      {activeUser?.user_type =='landlord'?(<div className={styles.formContainer}>
         <div className={styles.tabcontainer}>
         <div className={styles.tabHeader}>
           <button className={`${styles.tabbutton} ${activeTab=='properties' ? styles.tabactive : ''}`} onClick={()=>setActiveTab('properties')}>Properties</button>
@@ -83,8 +83,8 @@ console.log({myProperties});
         />
       </td>
     )}
-              <td>{myProperty .pro_title}<br/><span className={styles.muted_text}>{myProperty.total_units} units </span></td>
-              <td>{myProperty.created_at}</td>
+              <td>{myProperty?.pro_title}<br/><span className={styles.muted_text}>{myProperty?.total_units} units </span></td>
+              <td>{myProperty?.created_at}</td>
       </tr>
      </>))}
     
@@ -104,15 +104,15 @@ console.log({myProperties});
               <td>
                 <div className={styles.user}>
                   
-                  {subscription.pro_title}
+                  {subscription?.pro_title}
                 </div>
               </td>
-              <td>{subscription.subscription_active}</td>
+              <td>{subscription?.subscription_active}</td>
               <td>
-                {subscription.payment_status}
+                {subscription?.payment_status}
               </td>
               <td>
-                {subscription.amount}
+                {subscription?.amount}
               </td>
       </tr>))}
      
@@ -129,14 +129,14 @@ console.log({myProperties});
          {bookings.map(booking=>(<li className={styles.booking}>
           
             <div className={styles.booking_details}>
-              <h5 className={styles.booking_header}>{booking.pro_title}</h5>
-              <span className={styles.muted_text}>{booking.pro_type}</span>
+              <h5 className={styles.booking_header}>{booking?.pro_title}</h5>
+              <span className={styles.muted_text}>{booking?.pro_type}</span>
               <span className={styles.muted_text}>{booking.booked_date}</span>
             </div>
             <div className={styles.booking_status}>
             
             
-            {booking.booking_status == 'approved'?(<MdCheckCircle color='#1548be'  />):(<MdCheckCircleOutline color="gray"/>) }
+            {booking?.booking_status == 'approved'?(<MdCheckCircle color='#1548be'  />):(<MdCheckCircleOutline color="gray"/>) }
             </div>
          </li>))}
          </ul>
