@@ -9,11 +9,11 @@
     background-color: #2e374a;
     text-align: center;
     text-transform: capitalize;
-    border-radius: 5px;
+    border-radius: 10px;
     color:var(--textColor);
     margin-bottom: 10px;
     border-color: transparent;
-
+    border-right-width: 18px
   }
   
   .selected_option {

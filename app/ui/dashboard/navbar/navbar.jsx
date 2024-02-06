@@ -14,23 +14,10 @@ const Navbar = () => {
    console.log(pathname);
   return (
     <div className={styles.container}>
-    <div className={styles.large_menu}>
-      <div className={styles.title}>{pathname.split("/").pop()}</div>
-    <div className={styles.menu}>
-      <div className={styles.search}>
-        <MdSearch/>
-        <input type="text" placeholder="search..." className={styles.input}/>
-      </div>
-      <div className={styles.icons}>
-          <MdOutlineChat size={20} />
-          <MdNotifications size={20} />
-          <MdPublic size={20} />
-        </div>
-    </div>
-    </div>
+    
     <div className={styles.mobile}>
     <div className={styles.menu_mobile}>
-      <DropdownMenu/>
+     <div className={styles.DropdownMenu}><DropdownMenu/></div> 
       <div className={styles.title}>{pathname.split("/").pop()}</div>
       <div className={styles.icons}>
           <MdOutlineChat size={20} />
@@ -38,10 +25,7 @@ const Navbar = () => {
           <MdPublic size={20} />
         </div>
     </div>
-    <div className={styles.search}>
-        <MdSearch/>
-        <input type="text" placeholder="search..." className={styles.input}/>
-      </div>
+    
     </div>
     </div>
   )
