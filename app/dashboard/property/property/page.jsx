@@ -1,11 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import styles from "../../../ui/dashboard/products/singleProduct/singleProduct.module.css";
+import { useRouter } from "next/navigation";
+import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
+import api from "../../../lib/properties";
 import useRLStore from "../../../lib/store";
 import { getImages } from "../../../lib/utilties";
-import api from "../../../lib/properties";
-import { AiFillCloseCircle, AiFillCheckCircle } from "react-icons/ai";
+import styles from "../../../ui/dashboard/products/singleProduct/singleProduct.module.css";
 
 const SingleProductPage = () => {
   const router = useRouter();
@@ -51,8 +51,8 @@ const SingleProductPage = () => {
 
       <div className="section prodDetails">
         <div>
-          <h2>{activeProperty.pro_title}</h2>
-          <p>{`${activeProperty.pro_type} in ${activeProperty.location_name}` }</p>
+          <h2>{activeProperty?.pro_title}</h2>
+          <p>{`${activeProperty?.pro_type} in ${activeProperty?.location_name}` }</p>
         </div>
 
         <div>
@@ -65,7 +65,7 @@ const SingleProductPage = () => {
 
       <div className="section section_row stats">
         <div>
-          {activeProperty.subscription_active ? (
+          {activeProperty?.subscription_active ? (
             <AiFillCheckCircle color="lime" />
           ) : (
             <AiFillCloseCircle color="red" size={30} />
@@ -74,7 +74,7 @@ const SingleProductPage = () => {
         </div>
 
         <div>
-          {activeProperty.multiple_units ? (
+          {activeProperty?.multiple_units ? (
             <AiFillCheckCircle color="lime" />
           ) : (
             <AiFillCloseCircle color="red" />
@@ -83,7 +83,7 @@ const SingleProductPage = () => {
         </div>
 
         <div>
-          {activeProperty.isRentedOut ? (
+          {activeProperty?.isRentedOut ? (
             <AiFillCheckCircle color="lime" />
           ) : (
             <AiFillCloseCircle color="red" />
@@ -103,23 +103,23 @@ const SingleProductPage = () => {
 
       <div className="section">
         <h3>Landlord Details</h3>
-        <p>{activeProperty.full_name}</p>
+        <p>{activeProperty?.full_name}</p>
         <br />
         <small>
-          {`${activeProperty.country_code}${activeProperty.phone}`} |{" "}
-          {activeProperty.email}
+          {`${activeProperty?.country_code}${activeProperty?.phone}`} |{" "}
+          {activeProperty?.email}
         </small>
       </div>
 
       <div className="section">
         <h3>Description</h3>
-        <p>{activeProperty.description}</p>
+        <p>{activeProperty?.description}</p>
       </div>
 
       <div className="section">
         <h3>Amenties</h3>
         <div className="section_row">
-          {activeProperty.amenities.split(",").map((amenity) => (
+          {activeProperty?.amenities.split(",").map((amenity) => (
             <span>{amenity}</span>
           ))}
         </div>
@@ -128,10 +128,10 @@ const SingleProductPage = () => {
       <div className="section">
         <h3>Prices and Units</h3>
         <div>
-          {activeProperty.units.map((unit) => (
+          {activeProperty?.units.map((unit) => (
             <div className="unit_price">
-              <h3>{unit.unit_name}</h3>
-              <p>{`${unit.rent_fees} ${unit.currency}`}</p>
+              <h3>{unit?.unit_name}</h3>
+              <p>{`${unit?.rent_fees} ${unit?.currency}`}</p>
             </div>
           ))}
         </div>
