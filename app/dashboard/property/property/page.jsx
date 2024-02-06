@@ -92,7 +92,7 @@ const SingleProductPage = () => {
         </div>
 
         <div>
-          {activeProperty.deleted ? (
+          {activeProperty?.deleted ? (
             <AiFillCheckCircle color="red" />
           ) : (
             <AiFillCloseCircle color="lime" />
