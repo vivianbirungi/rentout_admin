@@ -6,7 +6,7 @@ import secureLocalStorage from "react-secure-storage";
   const router = useRouter();
 const user = secureLocalStorage.getItem('user');
 useEffect(() => {
- console.log('user;', user);
+
 
   if (!user) {
     router.replace('/login');

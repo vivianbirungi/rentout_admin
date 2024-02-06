@@ -40,7 +40,7 @@ const Products = () => {
       <div className={styles.properties}>
         {entries.map((property) => (
           <div className={styles.single}>
-            <Link href={`/dashboard/property/test`}>
+            <Link href={`/dashboard/property/property`}>
               <Product
                 productData={property}
               />
