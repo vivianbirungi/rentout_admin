@@ -20,8 +20,8 @@ const UsersPage = () => {
   // const users = useHttpGet(`get_Users/${type}`);
   const {tenants, landLords, getLandlords, getTenants, setActiveUser} = useRLStore(state => state);
   Array.isArray(landLords.results) ? landLords?.results.slice(start, end) : []
-  const entries = type === 'landlord' ? landLords?.results.slice(start, end):tenants?.results.slice(start, end)
-  const [filteredData, setFilteredData] = useState(type === 'landlord' ? landLords?.results.slice(start, end):tenants?.results.slice(start, end));
+  const entries = type === 'landlord' ? (Array.isArray(landLords.results) ? landLords?.results.slice(start, end):[]) :(Array.isArray(tenants?.results)?tenants.results?.slice(start, end):[])
+  const [filteredData, setFilteredData] = useState(type === 'landlord' ? (Array.isArray(landLords.results) ? landLords?.results.slice(start, end):[]) :(Array.isArray(tenants?.results)?tenants.results?.slice(start, end):[]));
   
   const handleSearch = (searchTerm) => {
     const filtered = entries.filter((item) =>
