@@ -105,7 +105,7 @@ const UsersPage = () => {
       
         </tbody>
       </table>
-      <Pagination arrayLength={type=='landlord'?landLords?.results.length: tenants?.results.length}
+      <Pagination arrayLength={type=='landlord'?landLords?.results?.length: tenants?.results?.length}
           currentPage={currentPage}
           handleClick={handlePagination}
           perpage={10} />
